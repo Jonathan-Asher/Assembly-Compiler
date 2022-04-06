@@ -66,7 +66,7 @@ bool macro_func(FILE *src, FILE *dest){
 
         }
         if(Ismacro){
-            sscanf(line + word_index, "%s", tmpStr);/*6 is the length of word "macro"*/
+            sscanf(line + word_index, "%s", tmpStr);
             word_index+=strlen(tmpStr)+1;
             if(validReg(tmpStr)){/*here I check for valid macro*/
                 success=FALSE;
@@ -169,7 +169,7 @@ void replace_multi_space_with_single_space(char *str)
     while (*str != '\0')
     {
 
-        while (*tmp == ' ' && *(tmp + 1) == ' ')
+        while (((*tmp == ' ')||(*tmp == '\t')) && ((*(tmp + 1) == ' ')||(*(tmp + 1) == '\t')))
             tmp++;  /* Just skip to next character */
 
 
