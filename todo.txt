@@ -1,0 +1,6 @@
+1. chech for label validity
+ - start with an alphabetic letter
+ - contains only alphanumerical letters
+ - has ':' after
+ - is defined once
+ - not a saved word
