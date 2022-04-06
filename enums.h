@@ -31,7 +31,8 @@ typedef enum ARE {
 } ARE;
 
 typedef enum registers {
-  R1 = 1,
+  R0,
+  R1,
   R2,
   R3,
   R4,
@@ -52,7 +53,8 @@ typedef enum label_type {
   STRING,
   STRUCT,
   ENTRY,
-  EXTERN
+  EXTERN,
+  CODE
 } label_type;
 
 typedef enum line_type {

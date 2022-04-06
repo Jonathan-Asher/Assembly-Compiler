@@ -2,13 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef MACRO_H
+#define MACRO_H
+
 #define MAX_LINE_LENGTH 80
 
 
 typedef enum boolean {
   FALSE = 0,
   TRUE = 1
-} boolean;
+} bool;
 
 typedef struct macros {
     char macro_name[MAX_LINE_LENGTH];
@@ -25,3 +28,4 @@ bool macro_func(FILE *, FILE *);
 
 
 
+#endif

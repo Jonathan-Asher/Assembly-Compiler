@@ -10,40 +10,32 @@
     fclose(src);
     fclose(dest);
     return success;
-
-
  }
 
 
 
 
 bool macro_func(FILE *src, FILE *dest){
-    char line[MAX_LINE_LENGTH]; /*get next line*/
-     char tmpStr[MAX_LINE_LENGTH];  
-     bool Ismacro=FALSE; /*inside a macro? */
-     bool success=TRUE; /*no errors in the proccess */
-     macro *macro_arr=NULL; /*aray of all macros*/
-     int macro_arr_index=0;
-     int i;
-     bool normal_line=TRUE;
-     int lineIndex;
-     int word_index;    
+  char line[MAX_LINE_LENGTH]; /* get next line */
+  char tmpStr[MAX_LINE_LENGTH];  
+  bool Ismacro=FALSE; /* inside a macro? */
+  bool success=TRUE; /* no errors in the proccess */
+  macro * macro_arr=NULL; /* aray of all macros */
+  int macro_arr_index=0;
+  int i;
+  bool normal_line=TRUE;
+  int lineIndex;
+  int word_index;    
 
-
-
-
-
-
-     for (lineIndex = 1; TRUE; lineIndex++) { /* Runs through all the lines. */
-         word_index=0;
-         normal_line=TRUE;
-         Ismacro=FALSE;
- 		if (!getLine(src, line)) {	
-                 end(src, dest, macro_arr, macro_arr_index);
-
-             /*end of code lines, save file*/
- 		    return TRUE; /* End when EOF is encountered - step 9*/
- 		}
+  for (lineIndex = 1; TRUE; lineIndex++) { /* Runs through all the lines. */
+      word_index=0;
+      normal_line=TRUE;
+      Ismacro=FALSE;
+    if (!getLine(src, line)) {	
+                end(src, dest, macro_arr, macro_arr_index);
+          /*end of code lines, save file*/
+    return TRUE; /* End when EOF is encountered - step 9*/
+    }
 
 
          replace_multi_space_with_single_space(line);

@@ -1,3 +1,12 @@
+
+Johnny
+* split line by spaces, commas, and ':'
+* binary to base32
+
+Nehara
+* function saved word check
+* check if str found in symbol table
+* add to symbol table
 1. chech for label validity
  - start with an alphabetic letter
  - contains only alphanumerical letters

@@ -4,7 +4,7 @@
 #define STRUCTS_H
 
 typedef struct word {
-  int data;
+  char * data;
   ARE end;
 } word;
 
@@ -14,7 +14,7 @@ typedef struct line {
 
 
 typedef struct data_node {
-  char * data;
+  word data;
   int address; // or int lineNum;
   data_node * next;
 } data_node;
@@ -27,7 +27,7 @@ typedef struct data_image {
 } data_image;
 
 typedef struct code_node {
-  char * code;
+  word code;
   int address; // or int lineNum;
   code_node * next;
 } code_node;
@@ -41,6 +41,7 @@ typedef struct code_image {
 
 typedef struct symbol_node {
 	char * symbolName;
+  label_type type;
   int address; // or int lineNum;
 	symbol_node * next;
 } symbol_node;
