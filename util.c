@@ -1,6 +1,8 @@
+
+
 bool validLabel(char *label){
     int i;
-    int len=sizeof(label)/sizeof(char);
+    int len=strlen(label);
     if(does_label_exist(label)){
         return FALSE;
     }
@@ -19,9 +21,7 @@ bool validLabel(char *label){
         }
     }
     return TRUE;
-    
 }
-
 
 
 bool add_label(char *symbolName, int address, struct symbol_table *p1){
