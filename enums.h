@@ -24,6 +24,11 @@ typedef enum opcode {
 	ERROR = -1
 } opcode;
 
+
+typedef enum booleans{
+	FALSE = 0, TRUE = 1
+}bool;
+
 typedef enum ARE {
   ABSOLUTE = 0,
   EXTERNAL = 1,

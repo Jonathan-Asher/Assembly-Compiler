@@ -43,13 +43,13 @@ typedef struct symbol_node {
 	char * symbolName;
   label_type type;
   int address; // or int lineNum;
-	symbol_node * next;
+	struct symbol_node * next;
 } symbol_node;
 
 // linked list of all the symbols
-typedef struct symbol_table {
+typedef struct symbol_table {  /*initial head to NULL necessary !@ */
 	symbol_node * head;
-	symbol_node * tail;
+	symbol_node * tail; /*tail is not needed !@*/
   int size;
 };
 

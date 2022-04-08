@@ -17,6 +17,7 @@ int main(){
 
 bool macro_func(FILE *src, FILE *dest){
     char line[MAX_LINE_LENGTH]; /* get next line */
+    char *line_pointer;
     char tmpStr[MAX_LINE_LENGTH];  
     bool Ismacro=FALSE; /* inside a macro? */
     bool success=TRUE; /* no errors in the proccess */
@@ -44,14 +45,16 @@ bool macro_func(FILE *src, FILE *dest){
  			continue;
 
         }
-        sscanf(line, "%s", tmpStr);
-        word_index+=strlen(tmpStr)+1;
+        line_pointer=line;
+        sscanf(line_pointer, "%s", tmpStr);
+        line_pointer+=strlen(tmpStr)+1;
 
 
         for(i=0; i<macro_arr_index; i++){
             if(!strcmp(macro_arr[i].macro_name, tmpStr)){
                 fprintf(dest,"%s", macro_arr[i].macro_lines);
                 normal_line=FALSE;
+                
                 break;
             }
 
@@ -66,8 +69,8 @@ bool macro_func(FILE *src, FILE *dest){
 
         }
         if(Ismacro){
-            sscanf(line + word_index, "%s", tmpStr);
-            word_index+=strlen(tmpStr)+1;
+            sscanf(line_pointer, "%s", tmpStr);
+            line_pointer+=strlen(tmpStr)+1;
             if(validReg(tmpStr)){/*here I check for valid macro*/
                 success=FALSE;
                 continue;
