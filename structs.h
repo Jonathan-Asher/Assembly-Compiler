@@ -47,10 +47,10 @@ typedef struct symbol_node {
 } symbol_node;
 
 // linked list of all the symbols
-typedef struct symbol_table {  /*initial head to NULL necessary !@ */
-	symbol_node * head;
+typedef struct symbol_table {  /*is it a global variable or should I pass it.. !@*/
+	symbol_node * head; /*initial head to NULL necessary !@ */
 	symbol_node * tail; /*tail is not needed !@*/
-  int size;
+  int size;  
 };
 
 
