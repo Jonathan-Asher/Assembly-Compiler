@@ -118,7 +118,7 @@ bool macro_func(FILE *src, FILE *dest){
 
 
 int end(macro_list *macros){
-    macro *macro_loop = macros.head;
+    macro *macro_loop = macros->head;
     macro *tmp = NULL;
 
     macro_line *line_loop;
@@ -129,7 +129,7 @@ int end(macro_list *macros){
         while(line_loop!=NULL){
             tmp2=line_loop->next;
             free(line_loop);
-            line_loop=tmp2
+            line_loop=tmp2;
         }    
 
         tmp=macro_loop->next;
@@ -142,6 +142,8 @@ int end(macro_list *macros){
 
 
 }
+
+
 
 
 
