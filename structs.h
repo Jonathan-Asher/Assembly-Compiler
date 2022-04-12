@@ -54,4 +54,25 @@ typedef struct symbol_table {  /*is it a global variable or should I pass it.. !
 };
 
 
+
+typedef struct macro_line{
+    char line[80];
+    struct macro_line *next;
+}macro_line;
+
+
+typedef struct macro{
+    char macro_name[MAX_LINE_LENGTH];
+    macro_line *head;
+    macro_line *tail;
+    struct macro *next;
+}macro;
+
+
+typedef struct macro_list{
+    macro *head;
+}macro_list;
+
+
+
 #endif

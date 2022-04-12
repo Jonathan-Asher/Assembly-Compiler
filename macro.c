@@ -118,15 +118,7 @@ bool macro_func(FILE *src, FILE *dest){
 
 
 int end(FILE *src, FILE *dest, macro *macro_arr,int arr_length){
-    /*int index=0;
-
-    for (; index<arr_length; index++){
-        free(macro_arr[index].macro_lines);
-    }
     
-    free(macro_arr);
-
-    return TRUE;*/
 
 }
 
