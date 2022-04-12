@@ -99,20 +99,6 @@ void replace_multi_space_with_single_space(char *str)
 /*  ----------------------LABELS--------------------------------*/
 
 
-typedef struct symbol_node {
-    char * symbolName;
-    int address; 
-    struct symbol_node *next;
-} symbol_node;
-
-
-typedef struct symbol_table {
-    symbol_node * head;
-    int size;
-    label_type type;
-};
-
-
 
 bool does_label_exist(char *, struct symbol_table );
 bool validLabel(char *, struct symbol_table);
