@@ -1,133 +1,132 @@
 #include "macro.h"
+#include "utils.c"
 
 
 
 int main(){
-    bool success;
-    FILE *src=fopen("text.tx", "r");
-    FILE *dest=fopen("textout.txt", "w");
-    success=macro_func(src, dest);
-    fclose(src);
-    fclose(dest);
-    return success;
+   bool success;
+   FILE *src=fopen("text.tx", "r");
+   FILE *dest=fopen("textout.txt", "w");
+   success=macro_func(src, dest);
+   fclose(src);
+   fclose(dest);
+   return success;
+
+
 }
 
 
 
 
 bool macro_func(FILE *src, FILE *dest){
-    char line[MAX_LINE_LENGTH]; /* get next line */
-    char *line_pointer;
+    
+
+    
+    char line[MAX_LINE_LENGTH]; /*get next line*/
     char tmpStr[MAX_LINE_LENGTH];  
-    bool Ismacro=FALSE; /* inside a macro? */
-    bool success=TRUE; /* no errors in the proccess */
-    macro * macro_arr=NULL; /* aray of all macros */
+    bool Ismacro=FALSE; /*inside a macro? */
+    bool success=TRUE; /*no errors in the proccess */
+    macro *macro_arr=NULL; /*aray of all macros*/
     int macro_arr_index=0;
     int i;
     bool normal_line=TRUE;
     int lineIndex;
-    int word_index;    
+    int word_index;    /*holds the position in the line*/
+    macro *current_macro=NULL;
+    struct macro_list list;
+    list.head=NULL;
+
+
+
 
     for (lineIndex = 1; TRUE; lineIndex++) { /* Runs through all the lines. */
         word_index=0;
         normal_line=TRUE;
         Ismacro=FALSE;
-        if (!getLine(src, line)) {	
+		if (!getLine(src, line)) {	
                 end(src, dest, macro_arr, macro_arr_index);
-          /*end of code lines, save file*/
-                return TRUE; /* End when EOF is encountered - step 9*/
-        }
+            
+            /*end of code lines, save file*/
+		    return success; /* End when EOF is encountered - step 9*/
+		}
 
-
+        
         replace_multi_space_with_single_space(line);
 
         if (isEffectLessLine(line)) {/*comments etc*/
- 			continue;
+			continue;
 
         }
-        line_pointer=line;
-        sscanf(line_pointer, "%s", tmpStr);
-        line_pointer+=strlen(tmpStr)+1;
+        sscanf(line, "%s", tmpStr);/*get 2st word of the line*/
+        word_index+=strlen(tmpStr)+1;
 
 
-        for(i=0; i<macro_arr_index; i++){
-            if(!strcmp(macro_arr[i].macro_name, tmpStr)){
-                fprintf(dest,"%s", macro_arr[i].macro_lines);
-                normal_line=FALSE;
-                
-                break;
-            }
-
-        }
-
+        /*check if it is  amacro name if it is -insert macro lines into file*/
+        normal_line = !does_macro_exist(tmpStr, list, dest);
+    
 
         if(!strcmp(tmpStr,"macro")){/*new macro*/
-
-            macro_arr = realloc(macro_arr, sizeof(macro)*(macro_arr_index+1));
             Ismacro=TRUE;
             normal_line=FALSE;
 
         }
         if(Ismacro){
-            sscanf(line_pointer, "%s", tmpStr);
-            line_pointer+=strlen(tmpStr)+1;
+            sscanf(line + word_index, "%s", tmpStr);/*6 is the length of word "macro"*/
+            word_index+=strlen(tmpStr)+1;
             if(validReg(tmpStr)){/*here I check for valid macro*/
                 success=FALSE;
                 continue;
             }    
             else{
+                /*add macro to list*/
+                current_macro=add_macro(tmpStr, &list);
 
-                strcpy(macro_arr[macro_arr_index].macro_name, tmpStr);
                 /*save macro name in table. then read all macro*/
                 while(TRUE){
                     if (!getLine(src, line)) {	/*step 1*/
                     success=FALSE;
                     end(src, dest, macro_arr, macro_arr_index);
- 			         /* End when EOF is encountered - step 9*/ 
+			         /* End when EOF is encountered - step 9*/ 
                     break;
                     }    
                     sscanf(line, "%s", tmpStr);
                     if(!strcmp(tmpStr,"endmacro")){
-                        macro_arr_index++;
                         break;
 
                     }  
                     else{
-                        /*add the line of the macro into the macro memory HERE!@*/
-
-                        macro_arr[macro_arr_index].macro_lines=(char *)realloc(macro_arr[macro_arr_index].macro_lines, sizeof(macro_arr[macro_arr_index].macro_lines)+sizeof(line));
-                        strcat(macro_arr[macro_arr_index].macro_lines, line);
-
-
+                        add_macro_line(line, current_macro);
+                       
 
                     }
 
                 }
-
+                
             }    
- 		}
+		}
+        /*if non of above then just write the line into the file*/
         if(normal_line){
-            fprintf(dest,"%s", line);
+           fprintf(dest,"%s", line);
 
         }
-         /*if non of above then just write the line into the file*/
+        
     }
-
+        
 
     return success;
 }
 
 
 int end(FILE *src, FILE *dest, macro *macro_arr,int arr_length){
-    int index=0;
+    /*int index=0;
 
     for (; index<arr_length; index++){
         free(macro_arr[index].macro_lines);
     }
-
+    
     free(macro_arr);
 
-    return TRUE;
+    return TRUE;*/
 
 }
 
@@ -135,51 +134,85 @@ int end(FILE *src, FILE *dest, macro *macro_arr,int arr_length){
 
 
 
-bool isEffectLessLine(char *line){
-    int length;
-    char tmpStr[MAX_LINE_LENGTH];
-    if ((length = strlen(line))== 0 || sscanf(line, "%s", tmpStr) == 0 || tmpStr[0] == ';' ) { 
-        return TRUE;
+
+bool does_macro_exist(char *name, struct macro_list p1, FILE *dest){
+    macro *tmp = p1.head;
+    while(tmp!=NULL){/*going through macros*/
+        if(!strcmp(tmp->macro_name, name)){
+            macro_line *tmp2=tmp->head;
+            while(tmp2!=NULL){/*going through lines*/
+                printf("\n line i %s\n", tmp2->line);
+
+                fprintf(dest, "%s", tmp2->line);
+                tmp2=tmp2->next;
+
+            }
+            return TRUE;
+        }
+        tmp=tmp->next;
     }
     return FALSE;
+
 }
 
 
-bool getLine(FILE *file, char *line){
+macro *add_macro(char *name, struct macro_list *p1){
+    printf("\n add macro %s", name);
+    macro *newNode = malloc(sizeof(struct macro));
+    strcpy(newNode->macro_name,name);
+    newNode->head=newNode->tail;
 
-    if (!fgets(line, MAX_LINE_LENGTH, file)) { /* EOF encountered */
- 		return FALSE;
- 	}
- 	return TRUE;
+
+
+
+    newNode->next=p1->head;
+    p1->head=newNode;
+    return newNode;
+
 }
 
 
 
-
-bool validReg(char *regStr) {
- 	return ((regStr[0] == 'r' && '0' <= regStr[1] && regStr[1] <= '7'
- 			&& regStr[2] == '\0') ? TRUE : FALSE);
-}
-
-
-
-
-
-void replace_multi_space_with_single_space(char *str)
-{
-    char *tmp = str;  
-
-    while (*str != '\0')
-    {
-
-        while (((*tmp == ' ')||(*tmp == '\t')) && ((*(tmp + 1) == ' ')||(*(tmp + 1) == '\t')))
-            tmp++;  /* Just skip to next character */
-
-
-        *str++ = *tmp++;
+   
+void print_list(struct macro_list p1){
+    printf("\n print list");
+    macro *tmp = p1.head;
+    while(tmp!=NULL){
+        printf("\n nrunning : %s \n", tmp->macro_name);
+        tmp=tmp->next;
     }
 
-     /* Make sure the string is properly terminated */    
-    *str = '\0';
+}
+
+
+
+
+void add_macro_line(char *line, macro *node){
+    static macro_line *myLine;
+    static macro *last_node;
+    if(last_node!=node){
+        myLine=NULL;
+    }
+    last_node=node;
+    printf("\n my Line is %s \n", myLine->line);
+    macro_line *newLine = malloc(sizeof(macro_line));
+    newLine->line[0]='\0';
+    newLine->next=NULL;
+    strcpy(newLine->line, line);
+    if(node->head==NULL){
+        node->head=myLine;
+    }
+    if(myLine==NULL){
+        myLine=newLine;
+    }
+    else{  
+        myLine->next=newLine;
+        myLine=myLine->next;
+    }
+    printf("%s", newLine->line);
+    
+    
+
 
 }
+
