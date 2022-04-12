@@ -44,7 +44,7 @@ bool macro_func(FILE *src, FILE *dest){
         normal_line=TRUE;
         Ismacro=FALSE;
 		if (!getLine(src, line)) {	
-                end(src, dest, macro_arr, macro_arr_index);
+                end(&list);
             
             /*end of code lines, save file*/
 		    return success; /* End when EOF is encountered - step 9*/
@@ -85,7 +85,7 @@ bool macro_func(FILE *src, FILE *dest){
                 while(TRUE){
                     if (!getLine(src, line)) {	/*step 1*/
                     success=FALSE;
-                    end(src, dest, macro_arr, macro_arr_index);
+                    end(&list);
 			         /* End when EOF is encountered - step 9*/ 
                     break;
                     }    
@@ -117,8 +117,29 @@ bool macro_func(FILE *src, FILE *dest){
 }
 
 
-int end(FILE *src, FILE *dest, macro *macro_arr,int arr_length){
-    
+int end(macro_list *macros){
+    macro *macro_loop = macros.head;
+    macro *tmp = NULL;
+
+    macro_line *line_loop;
+    macro_line *tmp2=NULL;
+
+    while(tmp!=NULL){
+        macro_line *line_loop=macro_loop->head;
+        while(line_loop!=NULL){
+            tmp2=line_loop->next;
+            free(line_loop);
+            line_loop=tmp2
+        }    
+
+        tmp=macro_loop->next;
+        free(macro_loop);
+        macro_loop=tmp2;
+
+
+
+    }
+
 
 }
 
