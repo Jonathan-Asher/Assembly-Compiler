@@ -1,5 +1,4 @@
-#include "macro.h"
-#include "utils.c"
+#include "macro_parser.h"
 
 int main() {
    bool success;
@@ -9,12 +8,9 @@ int main() {
    fclose(src);
    fclose(dest);
    return success;
-
 }
 
-bool macro_func(FILE *src, FILE *dest) {
-    
-
+bool macro_func(FILE *src, FILE *dest) { 
     char line[MAX_LINE_LENGTH]; /*get next line*/
     char tmpStr[MAX_LINE_LENGTH];  
     bool Ismacro=FALSE; /*inside a macro? */
@@ -150,7 +146,7 @@ bool does_macro_exist(char *name, struct macro_list p1, FILE *dest) {
 
 macro *add_macro(char *name, struct macro_list *p1) {
     printf("\n add macro %s", name);
-    macro *newNode = malloc(sizeof(struct macro));
+    macro *newNode = malloc_safe(sizeof(struct macro));
     strcpy(newNode->macro_name,name);
     newNode->head=newNode->tail;
 
@@ -179,7 +175,7 @@ void add_macro_line(char *line, macro *node) {
     }
     last_node=node;
     printf("\n my Line is %s \n", myLine->line);
-    macro_line *newLine = malloc(sizeof(macro_line));
+    macro_line *newLine = malloc_safe(sizeof(macro_line));
     newLine->line[0]='\0';
     newLine->next=NULL;
     strcpy(newLine->line, line);

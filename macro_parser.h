@@ -1,11 +1,12 @@
-#ifndef MACRO_H
-#define MACRO_H
+#ifndef MACRO_PARSER_H
+#define MACRO_PARSER_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"
 #include "enums.h"
+#include "util.h"
 
 void replace_multi_space_with_single_space(char *);
 bool validReg(char *);

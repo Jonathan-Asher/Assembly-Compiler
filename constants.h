@@ -1,6 +1,10 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 #define LINE_ARRAY_SIZE 6 * sizeof(char *) // or MAX_LINE_ENTITIES
 #define MAX_LINE_LENGTH 80
 #define MAX_OPERATIONS 16

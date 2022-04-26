@@ -1,19 +1,19 @@
-#include "parser.h"
+#include "line_parser.h"
 
 // test
-int main() {
-  line * cr = malloc(sizeof(line));
-  strcpy(cr->text, "a, , , ");
-  char ** arr = malloc(LINE_ARRAY_SIZE);
-  parseLine(cr, arr);
-  for (int i = 0; i < 6; i++) {
-    printf("%d: %s\n", i+1, arr[i]);
-  }
-  return 0;
-}
+// int main() {
+//   line * cr = malloc_safe(sizeof(line));
+//   strcpy(cr->text, "a, , , ");
+//   char ** arr = malloc_safe(LINE_ARRAY_SIZE);
+//   parseLine(cr, arr);
+//   for (int i = 0; i < 6; i++) {
+//     printf("%d: %s\n", i+1, arr[i]);
+//   }
+//   return 0;
+// }
 
 void parseLine(line * currentLine, char ** dest) {
-  char * currentWord = calloc((MAX_LINE_LENGTH + 1) * sizeof(char), (MAX_LINE_LENGTH + 1) * sizeof(char));
+  char * currentWord = calloc_safe(MAX_LINE_LENGTH, sizeof(char));
   int lineIndex = 1;
   int wordIndex = 0;
   for (int i = 0; currentLine->text[i] != '\0'; i++) {
@@ -28,18 +28,15 @@ void parseLine(line * currentLine, char ** dest) {
         dest[lineIndex] = ":";
         lineIndex ++; 
       } else if(currentWord[0] != '\0') {
-        printf("* %c *", currentLine->text[i]);
         dest[lineIndex] = strndup(currentWord, wordIndex);
         memset(currentWord,0,wordIndex);
         wordIndex = 0;
         lineIndex ++; 
       }
       if(currentLine->text[i] == ',') {
-        printf("! %c !", currentLine->text[i]);
         dest[lineIndex] = ",";
         lineIndex ++; 
-      }
-      
+      } 
     }
   }
   if(currentWord[0] != '\0')
