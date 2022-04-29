@@ -25,7 +25,6 @@ typedef struct data_node {
 // linked list of all the data instructions
 typedef struct data_image {
  data_node * head;
- data_node * tail;
  int size;
 } data_image;
 
@@ -38,7 +37,6 @@ typedef struct code_node {
 // linked list of all the code
 typedef struct code_image {
  code_node * head;
- code_node * tail;
  int size;
 } code_image;
 
@@ -50,9 +48,8 @@ typedef struct symbol_node {
 } symbol_node;
 
 // linked list of all the symbols
-typedef struct symbol_table {  /*is it a global variable or should I pass it.. !@*/
-	symbol_node * head; /*initial head to NULL necessary !@ */
-	symbol_node * tail; /*tail is not needed - no order!@*/
+typedef struct symbol_table {  
+	symbol_node * head;
   int size;  
 } symbol_table;
 

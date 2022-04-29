@@ -1,12 +1,12 @@
 #include "line_parser.h"
 
-// test
+/* test */
 // int main() {
 //   line * cr = malloc_safe(sizeof(line));
-//   strcpy(cr->text, "a, , , ");
-//   char ** arr = malloc_safe(LINE_ARRAY_SIZE);
+//   strcpy(cr->text, "LABEL: .data 1,2,3,4,5");
+//   char ** arr = malloc_safe(LINE_ARRAY_SIZE * sizeof(char *));
 //   parseLine(cr, arr);
-//   for (int i = 0; i < 6; i++) {
+//   for (int i = 0; i < LINE_ARRAY_SIZE; i++) {
 //     printf("%d: %s\n", i+1, arr[i]);
 //   }
 //   return 0;
