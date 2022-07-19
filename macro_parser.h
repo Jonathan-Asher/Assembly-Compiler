@@ -6,13 +6,17 @@
 #include <string.h>
 #include "structs.h"
 #include "enums.h"
-#include "util.h"
+#include "utils.h"
 
 void replace_multi_space_with_single_space(char *);
 bool validReg(char *);
 bool getLine(FILE *, char *);
 bool isEffectLessLine(char *);
-int end(FILE *src, FILE *dest, macro *macro_arr, int);
+void end(macro_list * macros);
+bool does_macro_exist(char *name, struct macro_list p1, FILE *dest);
+macro * add_macro(char *name, struct macro_list *p1);
+void add_macro_line(char *line, macro *node);
+void print_macro_list(struct macro_list p1);
 bool macro_func(FILE *, FILE *);
 
 #endif

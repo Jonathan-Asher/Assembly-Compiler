@@ -25,7 +25,7 @@ Nehara
 
 
 Johnny: 
-add ':' to label in line_parser
+add ':' to label in line_parser - DONE
 add error flag
 throw error
 bool validDataInstruction(); // .data .string. struct

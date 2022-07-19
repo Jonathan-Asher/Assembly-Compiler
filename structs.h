@@ -13,7 +13,7 @@ typedef struct line {
   char text[MAX_LINE_LENGTH];
   int length;
   line_type type;
-  int lineNum;
+  int line_num;
 } line;
 
 typedef struct data_node {

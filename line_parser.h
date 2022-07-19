@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"
-#include "util.h"
+#include "utils.h"
 
-void parseLine(line * currentLine, char ** dest);
+void parse_line(line * currentLine, char ** dest);
 
 #endif

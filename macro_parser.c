@@ -1,6 +1,6 @@
 #include "macro_parser.h"
 
-int main() {
+/* int main() {
    bool success;
    FILE *src=fopen("text.tx", "r");
    FILE *dest=fopen("textout.txt", "w");
@@ -8,16 +8,16 @@ int main() {
    fclose(src);
    fclose(dest);
    return success;
-}
+} */
 
 bool macro_func(FILE *src, FILE *dest) { 
     char line[MAX_LINE_LENGTH]; /*get next line*/
     char tmpStr[MAX_LINE_LENGTH];  
     bool Ismacro=FALSE; /*inside a macro? */
     bool success=TRUE; /*no errors in the proccess */
-    macro *macro_arr=NULL; /*aray of all macros*/
-    int macro_arr_index=0;
-    int i;
+    /* macro *macro_arr=NULL; aray of all macros  */
+    /* int macro_arr_index=0; */
+    /* int i; */
     bool normal_line=TRUE;
     int lineIndex;
     int word_index;    /*holds the position in the line*/
@@ -101,27 +101,23 @@ bool macro_func(FILE *src, FILE *dest) {
     return success;
 }
 
-int end(macro_list *macros) {
-    macro *macro_loop = macros->head;
-    macro *tmp = NULL;
+void end(macro_list * macros) {
+    macro * pos = macros->head;
+    macro * tmp = NULL;
 
-    macro_line *line_loop;
-    macro_line *tmp2=NULL;
+    macro_line * tmp_line = NULL;
 
-    while(tmp!=NULL) {
-        macro_line *line_loop=macro_loop->head;
-        while(line_loop!=NULL) {
-            tmp2=line_loop->next;
-            free(line_loop);
-            line_loop=tmp2;
-        }    
-
-        tmp=macro_loop->next;
-        free(macro_loop);
-        macro_loop=tmp2;
-
+    while(pos != NULL) {
+        macro_line * line_pos = pos->head;
+        while(line_pos != NULL) {
+            tmp_line = line_pos;
+            line_pos = line_pos->next;
+            free(tmp_line);
+        }
+        tmp = pos;
+        pos = pos->next;
+        free(tmp);
     }
-
 }
 
 bool does_macro_exist(char *name, struct macro_list p1, FILE *dest) {
@@ -144,7 +140,7 @@ bool does_macro_exist(char *name, struct macro_list p1, FILE *dest) {
 
 }
 
-macro *add_macro(char *name, struct macro_list *p1) {
+macro * add_macro(char *name, struct macro_list *p1) {
     printf("\n add macro %s", name);
     macro *newNode = malloc_safe(sizeof(struct macro));
     strcpy(newNode->macro_name,name);
@@ -157,7 +153,7 @@ macro *add_macro(char *name, struct macro_list *p1) {
 }
 
    
-void print_list(struct macro_list p1) {
+void print_macro_list(struct macro_list p1) {
     printf("\n print list");
     macro *tmp = p1.head;
     while(tmp!=NULL) {

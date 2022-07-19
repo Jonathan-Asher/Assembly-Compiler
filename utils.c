@@ -1,4 +1,4 @@
-#include "util.h"
+#include "utils.h"
 
 char *ops[] = {"mov", "cmp", "add", "sub", "not", "clr", "lea", "inc", "dec", "jmp", "bne", "get", "prn", "jsr", "rts", "hlt"};
 char *directives[] = {".data", ".string", ".struct", ".entry"};
