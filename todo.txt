@@ -26,10 +26,10 @@ tranfer macro to preassembler ( or rename )
 Johnny: 
 {
   add ':' to label in line_parser - DONE
-  add error flag
+  add error flag - DONE
   throw error
 
-  line_type getLineType(Line) + validate
+  line_type getLineType(Line) + validate - DONE
   label_type getInstType(Line) + validate
   opcode getCmdType(Line) + validate
   address_type getAddType(Line) + validate

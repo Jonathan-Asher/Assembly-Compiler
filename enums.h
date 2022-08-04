@@ -21,7 +21,7 @@ typedef enum opcode {
 	/* 0 Operators */
 	RTS_OP = 14,
 	HLT_OP = 15,
-	ERROR = -1
+	ERROR_OP = -1
 } opcode;
 
 typedef enum booleans {
@@ -46,6 +46,7 @@ typedef enum registers {
 } registers;
 
 typedef enum address_type {
+  ERROR_ADDRESS = -1,
   IMMEDIATE_ADDRESS, // 1 additional word
   DIRECT_ADDRESS, // 1 additional word
   STRUCT_ADDRESS, // 2 additional word

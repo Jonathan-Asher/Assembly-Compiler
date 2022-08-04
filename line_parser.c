@@ -50,6 +50,8 @@ line_type get_line_type(line * current_line) {
 
 label_type get_inst_type(line * current_line) {
   int i;
+  char * end;
+  long number_from_line;
   if(strcmp(current_line->parsed_line[1], ".data") == 0) {
     // Checks if label exist, and warns for data inst without label
     if(!current_line->parsed_line[0]) printf("Warning: No label for data instruction in line: %d\n", current_line->line_num);
@@ -57,8 +59,9 @@ label_type get_inst_type(line * current_line) {
     for(i = 2; i < LINE_ARRAY_SIZE; i++) {
       if(!current_line->parsed_line[i]) break;
       if(i % 2 == 0) {
-        int temp = atoi(current_line->parsed_line[i]);
-        printf("%d\t", temp);
+        number_from_line = strtol(current_line->parsed_line[i], &end, 10);
+        if((*end) != '\0')
+          printf("ERROR: variable %s in data instruction in index %d is not a number, line: %d\n", current_line->parsed_line[i], i-1, current_line->line_num);
       } else {
         
       }
@@ -82,10 +85,10 @@ label_type get_inst_type(line * current_line) {
 }
 
 opcode get_cmd_type(line * current_line) {
-
+  return ERROR_OP;
 }
 
 address_type get_addr_type(line * current_line) {
-
+  return ERROR_ADDRESS;
 }
 

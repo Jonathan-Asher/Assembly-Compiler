@@ -1,4 +1,4 @@
-XYZ: .data 7, -57,+17, 9
+XYZ: .data 7, -57a, , +17, 9
 MAIN: mov S1.1 ,LENGTH
 add r2, STR
 LOOP: jmp END
