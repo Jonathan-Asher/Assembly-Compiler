@@ -22,7 +22,7 @@ Nehara
 
 
 
-
+tranfer macro to preassembler ( or rename )
 
 Johnny: 
 add ':' to label in line_parser - DONE
