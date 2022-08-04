@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +10,9 @@
 #include "enums.h"
 
 bool saved_word(char *);
+
+bool is_directive(char *str);
+bool is_operator(char *str);
 bool isEffectLessLine(char *);
 bool getLine(FILE *, char *);
 bool validReg(char *);
@@ -20,3 +26,6 @@ void print_list(symbol_table);
 void * malloc_safe(size_t size);
 void * calloc_safe(size_t count, size_t size);
 void * realloc_safe(void * ptr, size_t size);
+
+
+#endif

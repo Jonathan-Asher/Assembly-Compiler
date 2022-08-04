@@ -3,7 +3,7 @@
 char *ops[] = {"mov", "cmp", "add", "sub", "not", "clr", "lea", "inc", "dec", "jmp", "bne", "get", "prn", "jsr", "rts", "hlt"};
 char *directives[] = {".data", ".string", ".struct", ".entry"};
 
-bool saved_word(char *str) { /*return true if str is a saved word*/
+bool saved_word(char *str) { /* return true if str is a saved word*/
 	int i;
 
 	for (i = 0; i < MAX_OPERATIONS; i++) {
@@ -13,6 +13,26 @@ bool saved_word(char *str) { /*return true if str is a saved word*/
 	}
 	for (i = 0; i < MAX_DIRECTIVES; i++) {
 		if (!strcmp(directives[i], str)) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+bool is_directive(char *str) { /* return true if str is a saved directive word*/
+	int i;
+	for (i = 0; i < MAX_DIRECTIVES; i++) {
+		if (!strcmp(directives[i], str)) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+bool is_operator(char *str) { /* return true if str is a saved operator word*/
+	int i;
+	for (i = 0; i < MAX_OPERATIONS; i++) {
+		if (!strcmp(ops[i], str)) {
 			return TRUE;
 		}
 	}
@@ -144,3 +164,4 @@ void * realloc_safe(void * ptr, size_t size) {
 	}
 	return pointer;
 }
+

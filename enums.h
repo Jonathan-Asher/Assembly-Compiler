@@ -53,20 +53,21 @@ typedef enum address_type {
 } address_type;
 
 typedef enum label_type {
-  DATA,
-  STRING,
-  STRUCT,
-  ENTRY,
-  EXTERN,
-  CODE
+  ERROR_LABEL,
+  DATA_LABEL,
+  STRING_LABEL,
+  STRUCT_LABEL,
+  ENTRY_LABEL,
+  EXTERN_LABEL,
+  CODE_LABEL
 } label_type;
 
 typedef enum line_type {
-    EMPTY_LINE,
-    COMMENT_LINE,
-    INSTRUCTION_LINE,
-    COMMAND_LINE,
-    ERROR_LINE
+  ERROR_LINE,
+  EMPTY_LINE,
+  COMMENT_LINE,
+  INSTRUCTION_LINE,
+  COMMAND_LINE
 } line_type;
 
 #endif

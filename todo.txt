@@ -1,46 +1,48 @@
+{
+  Johnny
+  * split line by spaces, commas, and ':'
+  * binary to base32
 
-Johnny
-* split line by spaces, commas, and ':'
-* binary to base32
-
-Nehara
-* function saved word check
-* check if str found in symbol table
-* add to symbol table
-1. chech for label validity
- - start with an alphabetic letter
- - contains only alphanumerical letters
- - has ':' after
- - is defined once
- - not a saved word
-
-
-* REMAINDER malloc param array with sizeof (char *)
-* REMAINDER all the images/table/variables will be global
+  Nehara
+  * function saved word check
+  * check if str found in symbol table
+  * add to symbol table
+  1. chech for label validity
+  - start with an alphabetic letter
+  - contains only alphanumerical letters
+  - has ':' after
+  - is defined once
+  - not a saved word
 
 
+  * REMAINDER malloc param array with sizeof (char *)
+  * REMAINDER all the images/table/variables will be global
+}
 
 
 
 tranfer macro to preassembler ( or rename )
 
 Johnny: 
-add ':' to label in line_parser - DONE
-add error flag
-throw error
+{
+  add ':' to label in line_parser - DONE
+  add error flag
+  throw error
 
-line_type getLineType(Line) + validate
-label_type getInstType(Line) + validate
-opcode getCmdType(Line) + validate
-address_type getAddType(Line) + validate
+  line_type getLineType(Line) + validate
+  label_type getInstType(Line) + validate
+  opcode getCmdType(Line) + validate
+  address_type getAddType(Line) + validate
 
-bool validDataInstruction(); // .data .string. struct
-bool validExtEntInstruction(); // .extern .entry
-bool validCodeInstruction(); // .code
-
+  bool validDataInstruction(); // .data .string. struct
+  bool validExtEntInstruction(); // .extern .entry
+  bool validCodeInstruction(); // .code
+}
 Nehara:
-LINE -> Line_parser -> validate -> if Label exists adds to corresponding images/tables without code image
-  is there .data without label?
-  calls add_label + add .data .string .struct instructions to data image
-transfer macro utils to macro_parser.c
-add init function, specificly symbol_table, and for each image
+{
+  LINE -> Line_parser -> validate -> if Label exists adds to corresponding images/tables without code image
+    is there .data without label?
+    calls add_label + add .data .string .struct instructions to data image
+  transfer macro utils to macro_parser.c
+  add init function, specificly symbol_table, and for each image
+}

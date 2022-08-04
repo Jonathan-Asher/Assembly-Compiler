@@ -14,6 +14,7 @@ typedef struct line {
   int length;
   line_type type;
   int line_num;
+  char ** parsed_line;
 } line;
 
 typedef struct data_node {
