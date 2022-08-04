@@ -65,7 +65,8 @@ typedef enum line_type {
     EMPTY_LINE,
     COMMENT_LINE,
     INSTRUCTION_LINE,
-    COMMAND_LINE
+    COMMAND_LINE,
+    ERROR_LINE
 } line_type;
 
 #endif

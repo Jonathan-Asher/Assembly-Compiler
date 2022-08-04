@@ -28,6 +28,12 @@ Johnny:
 add ':' to label in line_parser - DONE
 add error flag
 throw error
+
+line_type getLineType(Line) + validate
+label_type getInstType(Line) + validate
+opcode getCmdType(Line) + validate
+address_type getAddType(Line) + validate
+
 bool validDataInstruction(); // .data .string. struct
 bool validExtEntInstruction(); // .extern .entry
 bool validCodeInstruction(); // .code

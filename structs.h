@@ -67,6 +67,6 @@ typedef struct macro {
 
 typedef struct macro_list{
     macro *head;
-}macro_list;
+} macro_list;
 
 #endif
