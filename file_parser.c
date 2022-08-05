@@ -20,6 +20,7 @@ int parse_file(char * filename) {
   bool labelExists=false;
   symbol_table a1;
   a1.head=NULL;
+  int someUtsefullVar=0;
 
 
 
@@ -60,6 +61,20 @@ int parse_file(char * filename) {
     case INSTRUCTION_LINE:
       label_type ltype = get_inst_type(current_line);
       add_label(current_line->parsed_line[0], dc, label_type, a1)
+      switch (ltype)
+      {
+      case DATA_LABEL:
+        someUtsefullVar=2;
+        while(arr[someUtsefullVar]){
+          dc++;
+        }
+        /* code */
+        break;
+      
+      default:
+        break;
+      }
+
 
     case COMMAND_LINE:
       label_type ltype = get_cmd_type(current_line);
