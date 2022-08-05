@@ -70,7 +70,9 @@ int parse_file(char * filename) {
         }
         /* code */
         break;
-      
+      case STRING_LABEL:
+        dc+=arr[2].length+1;
+      case   
       default:
         break;
       }
