@@ -67,7 +67,7 @@ int parse_file(char * filename) {
       switch (ltype)
       {
       case DATA_LABEL:        
-          dc+=get_num_arguments();
+          dc+=get_num_arguments(current_line);
         }
         /* code */
         break;

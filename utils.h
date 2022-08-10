@@ -22,6 +22,8 @@ bool does_label_exist(char *, symbol_table);
 bool validLabel(char *, symbol_table);
 bool add_label(char *, int, label_type, symbol_table *);
 void print_list(symbol_table);
+int get_num_arguments(line);
+
 
 void * malloc_safe(size_t size);
 void * calloc_safe(size_t count, size_t size);
