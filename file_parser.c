@@ -17,7 +17,7 @@ int parse_file(char * filename) {
   ssize_t read;
   int line_num = 1;
   int i;
-  bool labelExists=false;
+  bool labelExists=FALSE;
   symbol_table a1;
   a1.head=NULL;
   int someUtsefullVar=0;
@@ -52,26 +52,27 @@ int parse_file(char * filename) {
     }
     current_line->type = get_line_type(current_line);
 
-    if(validLabel(current_line->parsed_line[0])){
-      labelExists=true;
+    if(validLabel(current_line->parsed_line[0], a1)){
+      labelExists=TRUE;
     }
 
     switch (current_line->type)
     {
     case INSTRUCTION_LINE:
       label_type ltype = get_inst_type(current_line);
-      add_label(current_line->parsed_line[0], dc, label_type, a1)
+      if(labelExists){       
+        add_label(current_line->parsed_line[0], dc, ltype, &a1);
+      }
+      add_to_data_image();
       switch (ltype)
       {
-      case DATA_LABEL:
-        someUtsefullVar=2;
-        while(arr[someUtsefullVar]){
-          dc++;
+      case DATA_LABEL:        
+          dc+=get_num_arguments();
         }
         /* code */
         break;
       case STRING_LABEL:
-        dc+=arr[2].length+1;
+        dc+=current_line->parsed_line[2].length+1;
       case   
       default:
         break;

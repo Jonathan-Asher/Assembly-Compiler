@@ -136,6 +136,16 @@ bool does_label_exist(char *label, symbol_table p1) {
 	return FALSE;
 }
 
+int get_num_arguments(line my_line){
+	int i=2;
+	int num_arguments=0;
+	while(my_line.parsed_line[i]){
+		num_arguments++;
+		i+=2;
+	}
+	return num_arguments;
+}
+
 /*   ----------------------------END LABELS---------------------------------------*/
 
 void * malloc_safe(size_t size) {
